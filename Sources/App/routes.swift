@@ -11,7 +11,11 @@ public func routes(_ router: Router) throws {
     router.get("hello") { req in
         return "Hello, world!"
     }
-
+    
+    router.get("item") { req -> [Item] in
+        return [Item(name: "teste", description: "teste1", price: 10)]
+    }
+    
     // Example of configuring a controller
     let todoController = TodoController()
     router.get("todos", use: todoController.index)
