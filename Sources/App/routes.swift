@@ -13,7 +13,10 @@ public func routes(_ router: Router) throws {
     }
     
     router.get("item") { req -> [Item] in
-        return [Item(name: "teste", description: "teste1", price: 10)]
+        guard let category = req.query[Categories.self, at: "category"] else {
+            return Item.mockItens()
+        }
+        return Item.mockItens(category: category)
     }
     
     // Example of configuring a controller
