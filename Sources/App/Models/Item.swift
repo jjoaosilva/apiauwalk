@@ -15,30 +15,32 @@ enum Categories: Int, Decodable {
     case all = 5
 }
 
-struct Item: Content {
+struct Item: Content, Equatable {
     var name : String
     var description : String
     var price : Int
     var category : String
+    var image: String
     
-    init (name : String, description: String, price: Int, category : String ) {
+    init (name : String, description: String, price: Int, category : String, image: String ) {
         self.name = name
         self.description = description
         self.price = price
         self.category = category
+        self.image = image
     }
     
     static func mockItens(category: Categories = .all) -> [Item] {
-        var itensMock = [
-            Item(name: "Mamadeira", description: "Ótima fonte de vitaminas.", price: 300, category: "1"),
-            Item(name: "Osso", description: "Ótimo para os dentes do seu pet.", price: 250, category: "1"),
-            Item(name: "Ração", description: "Alimento mais completo.", price: 500, category: "1"),
-            Item(name: "Sabonete", description: "Para uma limpeza mais simples.", price: 300, category: "2"),
-            Item(name: "Shamppo", description: "Ótimo para o pelo do seu pet", price: 500, category: "2"),
-            Item(name: "Hidratante", description: "Ótimo para a pele do seu pet.", price: 700, category: "2"),
-            Item(name: "Bolinha", description: "Brinque com seu pet.", price: 300, category: "3"),
-            Item(name: "Osso de brinquedo", description: "Otimo para ele brincar sozinho.", price: 600, category: "3"),
-            Item(name: "Caminha", description: "Otimo para recarregar as energias.", price: 500, category: "4")
+        let itensMock = [
+            Item(name: "Mamadeira", description: "Ótima fonte de vitaminas.", price: 300, category: "1", image: "mamadeira"),
+            Item(name: "Osso", description: "Ótimo para os dentes do seu pet.", price: 250, category: "1", image: "osso"),
+            Item(name: "Ração", description: "Alimento mais completo.", price: 500, category: "1", image: "racao"),
+            Item(name: "Sabonete", description: "Para uma limpeza mais simples.", price: 300, category: "2", image: "sabonete"),
+            Item(name: "Shampoo", description: "Ótimo para o pelo do seu pet", price: 500, category: "2", image: "shampoo"),
+            Item(name: "Hidratante", description: "Ótimo para a pele do seu pet.", price: 700, category: "2", image: "hidratante"),
+            Item(name: "Bolinha", description: "Brinque com seu pet.", price: 300, category: "3", image: "bolinha"),
+            Item(name: "Osso de brinquedo", description: "Otimo para ele brincar sozinho.", price: 600, category: "3", image: "osso de brinquedo"),
+            Item(name: "Caminha", description: "Otimo para recarregar as energias.", price: 500, category: "4", image: "caminha")
         ]
         
         switch category {
@@ -50,7 +52,7 @@ struct Item: Content {
             return itensMock.filter{ $0.category == "3" }
         case .energy:
             return itensMock.filter{ $0.category == "4" }   
-        case .all:
+        default:
             return itensMock
         }
     }
